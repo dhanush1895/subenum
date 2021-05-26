@@ -29,7 +29,7 @@ Sub domain enumeration tool based on All open source Tool, this is a Bash file w
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png">
+  <a href="https://github.com/dhanush1895/subenum/blob/main/logo-dark-2020.png">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
