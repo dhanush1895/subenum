@@ -13,3 +13,8 @@ alias massdns="/home/dhanush/tools/massdns/./bin/massdns"
 alias subenum="./scripts/subenum.sh"
 
 alias subbrute="python3 /home/dhanush/tools/subbrute/subbrute.py"
+alias fierce="python3 ~/tools/fierce/fierce/fierce.py"
+
+
+#for bashrc running
+[ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"
