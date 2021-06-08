@@ -1,0 +1,107 @@
+resolvers:
+    - 1.1.1.1:53
+    - 1.0.0.1:53
+    - 8.8.8.8:53
+    - 8.8.4.4:53
+    - 9.9.9.9:53
+    - 9.9.9.10:53
+    - 77.88.8.8:53
+    - 77.88.8.1:53
+    - 208.67.222.222:53
+    - 208.67.220.220:53
+sources:
+    - alienvault
+    - anubis
+    - bufferover
+    - certspotter
+    - censys
+    - chaos
+    - crtsh
+    - dnsdumpster
+    - hackertarget
+    - intelx
+    - passivetotal
+    - robtex
+    - riddler
+    - securitytrails
+    - shodan
+    - spyse
+    - sublist3r
+    - threatcrowd
+    - threatminer
+    - virustotal
+all-sources:
+    - alienvault
+    - anubis
+    - archiveis
+    - binaryedge
+    - bufferover
+    - censys
+    - certspotter
+    - chaos
+    - commoncrawl
+    - crtsh
+    - dnsdumpster
+    - dnsdb
+    - github
+    - hackertarget
+    - intelx
+    - passivetotal
+    - rapiddns
+    - riddler
+    - recon
+    - robtex
+    - securitytrails
+    - shodan
+    - sitedossier
+    - sonarsearch
+    - spyse
+    - sublist3r
+    - threatbook
+    - threatcrowd
+    - threatminer
+    - virustotal
+    - waybackarchive
+    - zoomeye
+recursive:
+    - alienvault
+    - binaryedge
+    - bufferover
+    - certspotter
+    - crtsh
+    - dnsdumpster
+    - hackertarget
+    - passivetotal
+    - securitytrails
+    - sonarsearch
+    - sublist3r
+    - virustotal
+binaryedge:
+    - ef77559c-333c-4cca-b9f0-f04f5eaf8cd2
+censys:
+    - 9386af76-ce45-4afa-ad08-bf91de24403b:BvhrVl25O3yKOMaxdILyqTlRzqOSw3FE
+certspotter:
+    - 35156_YKVeLDpVVz9Wok6DmqcJ
+chaos: []
+dnsdb: []
+github:
+    - 224b061e1ac533e90728a1b5b800c932277d0ca7
+intelx:
+    - b82067a9-1650-4bba-80d1-3db42656d8fe
+passivetotal:
+    - devkapil1895@gmail.com:7e44cb47a0b029a10bb440f36a16456bfd750518669cd8d782e5af435fc5da1b
+recon:
+    - free-4a75584e-996d-4dec-b3cb-d7263cc9cd3c
+robtex: []
+securitytrails:
+    - XkTqjWdzWaLB7mDYbEJo2c22xqYMYNhZ
+shodan:
+    - 4Vuz7WFvF6WaMfjMFa2sObm1hT37d5fV
+spyse: []
+threatbook: []
+urlscan:
+    - 412b992b-51a1-4bdc-bf18-6dc10b6dc69c
+virustotal:
+    - 00a52c2630d8f66be0cc67db14cff05369befbb85c677f97fb9d153ce348c9a5
+zoomeye: []
+subfinder-version: 2.4.8
