@@ -80,23 +80,25 @@ Sub domain enumeration tool based on All open source Tool, this is a Bash file w
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+There are many great scripts available on GitHub, however, I want to make myself a own script.
 
 Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should element DRY principles to the rest of your life :smile:
+* Your time should be focused on creating something amazing. A project that solves a problem, helps others and understand's what's the code does in easy way.
+* You shouldn't be doing the same tasks over and over like creating a folder or searching for if the same folder is existed or not.
+* You should have clear path of discovering & gathering sub-domains. 
+* Some of the tools fail's to discover the unique sub-domain's, So in the discovering phase while pen-testing or Bug Hunting, we should gather all the related stuff's to that organization.
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
+Of course, no one tool/script will serve all the needs since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
 
 A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
 ### Built With
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+<!--* [Bootstrap](https://getbootstrap.com)-->
+<!--* [JQuery](https://jquery.com)![Logo](https://user-images.githubusercontent.com/63894857/125989640-6558a0fc-36cb-4926-95ce-cbe34a8ee2fc.png)
+
+* [Laravel](https://laravel.com)-->
 
 
 
@@ -108,45 +110,38 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+This script runs in linux environment(linux & ubuntu tested)
 
 ### Installation
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/dhanush1895/subenum.git
    ```
-3. Install NPM packages
+2. Install the script --> subenum-install.sh
    ```sh
-   npm install
+   chmod +x subenum-install.sh
+   ./subenum-install.sh
    ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
+3. Enter your API-key's in `config.yaml`- subfinder config file,`config.ini`- amass config file.
+4. Keep alias for subenum
+   ```sh
+   alias subenum="bash path_to_script"
    ```
 
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
+1. ```sh
+   subenum google.com
+   ```
 
 <!-- ROADMAP -->
 ## Roadmap
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
-
+* To get massive amount of sub-domains using all the open-source tools
+* To filter & resolve out the live sub-domains 
+* To Run sub-domain takeover scan using nuclei templates
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -160,36 +155,12 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/dhanush1895) - dhanushkalimeli@gmail.com
+Daniel goes by `dhanush1895` on Internet  - [@dhanush1895](https://twitter.com/dhanush1895) 
+mailto:dhanushkalimeli@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
