@@ -126,7 +126,8 @@ Contributions are what make the open source community such an amazing place to b
 ## Contact
 
 Daniel goes by `dhanush1895` on Internet  - [@dhanush1895](https://twitter.com/dhanush1895) 
-mailto:dhanushkalimeli@gmail.com
+
+dhanushkalimeli@gmail.com
 
 
 
