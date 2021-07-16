@@ -68,22 +68,12 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 ### Built With
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-<!--* [Bootstrap](https://getbootstrap.com)-->
-<!--* [JQuery](https://jquery.com)![Logo](https://user-images.githubusercontent.com/63894857/125989640-6558a0fc-36cb-4926-95ce-cbe34a8ee2fc.png)
 
-* [Laravel](https://laravel.com)-->
-
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
 This script runs in linux environment(linux & ubuntu tested)
+
 
 ### Installation
 
@@ -94,6 +84,8 @@ This script runs in linux environment(linux & ubuntu tested)
 2. Install the script --> subenum-install.sh
    ```sh
    chmod +x subenum-install.sh
+   ```
+   ```sh
    ./subenum-install.sh
    ```
 3. Enter your API-key's in `config.yaml`- subfinder config file,`config.ini`- amass config file.
