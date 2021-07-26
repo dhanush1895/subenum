@@ -26,7 +26,7 @@ Sub domain enumeration tool based on All open source Tool, this is a Bash file w
 <br />
 <p align="center">
   <a href="Logo.png">
-    <img src="Logo.png" alt="Logo" width="80" height="80">
+    <img src="Logo.png" alt="Logo" width="150" height="180">
   </a>
 
     <br />
