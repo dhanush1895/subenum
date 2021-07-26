@@ -44,7 +44,7 @@ Sub domain enumeration tool based on All open source Tool, this is a Bash file w
   </p>
 </p>
 
-There are many great scripts available on GitHub, however, I want to make myself a own script.
+There are many great scripts available on GitHub, however, I want to make myself an own script.
 
 Here's why:
 * Your time should be focused on creating something amazing. A project that solves a problem, helps others and understand's what's the code does in easy way.
