@@ -26,11 +26,8 @@ Sub domain enumeration tool based on All open source Tool, this is a Bash file w
 <br />
 <p align="center">
   <a href="Logo.png">
-    <img src="Logo.png" alt="Logo" width="150" height="180">
+    <img src="Logo.png" alt="Logo" width="600" height="200">
   </a>
-
-    <br />
-    <br />
   </p>
 </p>
 
@@ -78,7 +75,7 @@ This script runs in linux environment(linux & ubuntu tested)
    ./subenum-install.sh
    ```
 3. Enter your API-key's in `config.yaml`- subfinder config file,`config.ini`- amass config file.
-4. Keep alias for subenum
+4. Keep alias for subenum in your .profile/.bash_profile/.bash_aliases 
    ```sh
    alias subenum="bash path_to_script"
    ```
