@@ -90,7 +90,9 @@ This script runs in linux environment(linux & ubuntu tested)
 <!-- USAGE EXAMPLES -->
 ## Usage
 1. ```sh
-   subenum google.com
+   subenum
+   [LOGO]
+   google.com
    ```
 
 <!-- ROADMAP -->
