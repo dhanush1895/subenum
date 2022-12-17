@@ -89,17 +89,26 @@ This script runs in linux environment(linux & ubuntu tested)
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-1. ```sh
-   subenum
-   [LOGO]
-   google.com
+1. ```
+      Usage: subenum -d google.com
+      Usage: subenum -f PATH/TO/FILE
+      Usage: subenum -d google.com -c [1|2]
+      Usage: subenum -f PATH/TO/domains.txt -c [1|2]
+      Flags:
+      -h, -help                      Show's usage
+      -d, -domain                    Add your domain
+      -f, -file                      List of Domains as file.txt should be line separated file
+      -c, -config                      config file for amass
+      Example Usage
+      ./subenum.sh -d google.com
+      ./subenum.sh -f domains.txt
    ```
 
 <!-- ROADMAP -->
 ## Roadmap
-* To get massive amount of sub-domains using all the open-source tools
-* To filter & resolve out the live sub-domains 
-* To Run sub-domain takeover scan using nuclei templates
+- [X] To get massive amount of sub-domains using all the open-source tools
+- [X] To filter & resolve out the live sub-domains 
+- [X] To Run sub-domain takeover scan using nuclei templates
 
 <!-- CONTRIBUTING -->
 ## Contributing
