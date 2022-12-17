@@ -1,22 +1,5 @@
 # subenum
 Subdomain enumeration tool based on All open source Tool, this is a Bash file which performs Domain as a target in all Described tools & resources and passes out the results and live domains into both separate files.
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 
 [![LinkedIn][linkedin-shield]][linkedin-url] ![Twitter Follow](https://img.shields.io/twitter/follow/dhanush1895?style=social)
 
@@ -58,12 +41,28 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+- Dnsvalidator
+- Amass
+- assetfinder
+- subfinder
+- sublist3r
+- github-subdomains
+- crt.sh
+- dns.bufferover.run
+- sonar.omisint.io
+- web.archive
+- knockpy
+- GOBUSTER
+- knockknock
+- httpx
+- nuclei
+- notify
 
 
 ### Prerequisites
-
-This script runs in linux environment(linux & ubuntu tested)
+- A Stable Internet Connection with high speed
+ 
+- [X] This script runs in linux environment (linux & ubuntu) 
 
 
 ### Installation
