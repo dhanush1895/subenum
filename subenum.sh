@@ -396,10 +396,10 @@ USAGE(){
     echo -e " -f, -file                      List of Domains as file.txt should be line separated file                    ${RESET}"
     echo -e "${RED} -c, -config                      config file for amass                                               "
     echo -e "${GREEN}Example Usage${RESET}\n"
-    echo -e " ${BLINK}${BLUE}./subenum.sh -d google.com\n"
-    echo -e " ./subenum.sh -f domains.txt\n"
-    echo -e " ./subenum.sh -d google.com -c [1|2]\n"
-    echo -e " ./subenum.sh -f domains.txt -c [1|2] \n${RESET}"
+    echo -e " ${BLINK}${BLUE}./subenum.sh -d google.com"
+    echo -e " ./subenum.sh -f domains.txt"
+    echo -e " ./subenum.sh -d google.com -c [1|2]"
+    echo -e " ./subenum.sh -f domains.txt -c [1|2]${RESET}"
     echo -e ""
 
 }
@@ -481,7 +481,7 @@ elif [ -f ~/.config/amass/config.ini ] || [ -f ~/.config/amass/config*.ini ]
 elif [ -f ~/.config/notify/config.yaml ] || [ -f ~/.config/amass/provider-config.yaml ]
     continue
 else
-    echo "${BLINK}${RED}Subfinder & Amass config should be set in order to run !!!${RESET}"
+    echo "${BLINK}${RED}Subfinder & Amass & nofity config's should be set in order to run !!!${RESET}"
     exit
 fi
 
