@@ -477,8 +477,10 @@ if [ -f ~/.config/subfinder/config.yaml ] || [ -f ~/.config/subfinder/provider-c
 then
     continue
 elif [ -f ~/.config/amass/config.ini ] || [ -f ~/.config/amass/config*.ini ]
+then
     continue
 elif [ -f ~/.config/notify/config.yaml ] || [ -f ~/.config/amass/provider-config.yaml ]
+then
     continue
 else
     echo "${BLINK}${RED}Subfinder & Amass & nofity config's should be set in order to run !!!${RESET}"
