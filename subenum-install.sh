@@ -1,33 +1,31 @@
 #!/bin/bash/
 
 #go
-#anew
 #notify 
-#intercept
 #assetfinder
-#go-github-subdomains
 #amass
 #subfinder
-#sublist3r
-#knockknock or knock2
+#findomain
+#subls
+#github-subd
+#knockknock
+#fuzz
+#wordlist - all
 #knockpy
+#subbrute
+#filter-resolved
 #httpx
-#nuclei
-#crtpy
-#shuffledns
-#massdns
-#CENT tool
-#Naabu
-#trickest/resolvers
-#trickest/wordlists
+#nuclei 
+
+
 
 RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
 BLUE=$(tput setaf 4)
 RESET=$(tput sgr0)
 
-echo -e "\n\n${RED}Specify the VERSION of AMASS:\n\nEx:3.21.2 \nYou can check from -> 'https://github.com/OWASP/Amass'\nAMASS_VERSION>>>\c" && read AMASS_VERSION 
-echo -e "\n\nSpecify the VERSION of GO:\n\nEx:1.19.4 \nYou can check from -> 'https://go.dev/doc/install'\nGOVERSION>>>\c${RESET}" && read GOVERSION
+echo -e "\n\n${RED}Specify the VERSION of AMASS:\n\nEx:3.21.2 \nYou can check from -> 'https://github.com/OWASP/Amass/releases'\nAMASS_VERSION>>>\c" && read AMASS_VERSION 
+echo -e "\n\nSpecify the VERSION of GO:\n\nEx:1.19.3 \nYou can check from -> 'https://go.dev/doc/install'\nGOVERSION>>>\c${RESET}" && read GOVERSION
 
 sudo apt-get -y update
 sudo apt-get -y upgrade
@@ -71,7 +69,7 @@ GOSCRIPT(){
             #!/bin/bash
             # shellcheck disable=SC2016
             #set -e
-            #VERSION="1.19.3"
+            #VERSION="1.20.1"
 
             [ -z "$GOROOT" ] && GOROOT="$HOME/.go"
             [ -z "$GOPATH" ] && GOPATH="$HOME/go"
@@ -283,19 +281,71 @@ echo "${BLUE}Installing Go version of github-subdomains scanning${RESET}"
 GO111MODULE=on go install github.com/gwen001/github-subdomains@latest
 echo "${BLUE}done${RESET}"
 
-echo "${BLUE} Installing amass${RESET}"
-cd ~ && echo -e "Downloading amass version ${AMASS_VERSION} ..." && wget -q https://github.com/OWASP/Amass/releases/download/v${AMASS_VERSION}/amass_linux_amd64.zip && unzip amass_linux_amd64.zip
-sudo mv amass_linux_amd64/amass /usr/bin/
-cd ~ && rm -rf amass_linux_amd64* amass_linux_amd64.zip*
-echo "${BLUE} done${RESET}"
-echo ""
+AMASSDOWNLOAD(){
+    OS="$(uname -s)"
+    ARCH="$(uname -m)"
+
+    case $OS in
+        "Linux")
+            case $ARCH in
+            "x86_64")
+                ARCH=amd64
+                ;;
+            "aarch64")
+                ARCH=arm64
+                ;;
+            "armv6" | "armv7l")
+                ARCH=armv6l
+                ;;
+            "armv8")
+                ARCH=arm64
+                ;;
+            .*386.*)
+                ARCH=386
+                ;;
+            esac
+            PLATFORM="linux_$ARCH"
+        ;;
+        "Darwin")
+              case $ARCH in
+              "x86_64")
+                  ARCH=amd64
+                  ;;
+              "arm64")
+                  ARCH=arm64
+                  ;;
+              esac
+            PLATFORM="darwin_$ARCH"
+        ;;
+    esac
+
+    echo "${BLUE} Installing amass${RESET}"
+    cd ~ && echo -e "Downloading amass version ${AMASS_VERSION} ..." && wget -q https://github.com/OWASP/Amass/releases/download/v${AMASS_VERSION}/amass_${PLATFORM}.zip && unzip amass_${PLATFORM}.zip
+    sudo mv amass_linux_amd64/amass /usr/bin/
+    cd ~ && rm -rf amass_${PLATFORM}* amass_${PLATFORM}.zip*
+    mkdir -p ~/.config/amass && cd ~/.config/amass && wget -q https://raw.githubusercontent.com/OWASP/Amass/master/examples/config.ini
+    echo "${BLUE}Amass done${RESET}"
+    echo ""
+
+}
+
+AMASSDOWNLOAD
 
 
 echo "${BLUE} Installing subfinder${RESET}"
 GO111MODULE=on go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+
 echo "${BLUE}done${RESET}"
 echo ""
 
+# echo "${BLUE} Installing findomain${RESET}"
+# cd ~/tools
+# wget https://github.com/Findomain/Findomain/releases/download/8.2.1/findomain-linux.zip
+# sudo chmod +x findomain-linux
+# sudo mv findomain-linux /usr/bin/
+# echo "${BLUE} Add your keys in the config file"
+# echo "${BLUE} done${RESET}"
+# echo ""
 sar 1 1 >/dev/null
 
 
@@ -312,6 +362,17 @@ go install -v github.com/harleo/knockknock@latest
 echo "${BLUE} done${RESET}"
 echo ""
 
+
+echo "${BLUE} Installing ffuf${RESET}"
+go install -v github.com/ffuf/ffuf@latest
+echo "${BLUE} done${RESET}"
+echo ""
+
+echo "${BLUE}Installing subbrute${RESET}"
+cd ~/tools
+git clone https://github.com/TheRook/subbrute.git
+echo "${BLUE}done${RESET}"
+
 echo "${BLUE} Downloading knockpy${RESET}"
 cd ~/tools/ && git clone https://github.com/guelfoweb/knock.git
 cd knock
@@ -320,8 +381,16 @@ sudo python3 setup.py install
 virtualenv --python=python3 venv3
 source venv3/bin/activate
 pip3 install -r requirements.txt
+
 echo "${BLUE} done${RESET}"
 echo ""
+
+
+echo "${BLUE} Installing filter-resolved${RESET}"
+GO111MODULE=on go install -v github.com/tomnomnom/hacks/filter-resolved@install
+echo "${BLUE} done${RESET}"
+echo ""
+
 
 echo "${BLUE} Installing httpx${RESET}"
 GO111MODULE=on go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
@@ -333,6 +402,11 @@ GO111MODULE=on go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@la
 echo "${BLUE} done${RESET}"
 echo ""
 
+echo "${BLUE}Installing JSUBFINDER${RESET}"
+GO111MODULE=on go install -v github.com/hiddengearz/jsubfinder@latest
+wget https://raw.githubusercontent.com/hiddengearz/jsubfinder/master/.jsf_signatures.yaml && mv .jsf_signatures.yaml ~/.jsf_signatures.yaml
+echo "${BLUE}done${RESET}"
+
 echo "${BLUE}Installing crtpy${RESET}"
 cd ~/tools && git clone https://github.com/YashGoti/crtsh.py.git
 cd crtsh.py
@@ -341,15 +415,28 @@ chmod +x crtsh
 sudo cp crtsh /usr/bin/
 echo "${BLUE}done${RESET}"
 
+echo "${BLUE}Installing dnsvalidator${RESET}"
+cd ~/tools && git clone https://github.com/vortexau/dnsvalidator.git
+cd dnsvalidator && sudo python3 setup.py install
+echo "${BLUE}done${RESET}"
+
 echo "${BLUE}Installing shuffledns${RESET}"
 GO111MODULE=on go install -v github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest
 echo "${BLUE}done${RESET}"
 
 
 echo "${BLUE} Installing massdns ${RESET}"
-git clone https://github.com/blechschmidt/massdns.git ~/tools/
+git clone https://github.com/blechschmidt/massdns.git ~/tools
 cd ~/tools/massdns
 make && sudo make install
+echo "${BLUE} done ${RESET}"
+echo ""
+
+echo "${BLUE}Installing SD-GOO ${RESET}"
+cd ~/tools
+git clone https://github.com/darklotuskdb/sd-goo.git
+cd sd-goo && chmod +x *.sh 
+echo -e "USAGE : ./sd-goo.sh google.com | sort -u"
 echo "${BLUE} done ${RESET}"
 echo ""
 
@@ -361,10 +448,32 @@ cent update
 cent -p ~/cent-nuclei-templates -k
 echo "${BLUE}done${RESET}"
 
+echo "${BLUE}Installing ${RED}gobuster ${RESET}"
+GO111MODULE=on go install github.com/OJ/gobuster/v3@latest
+echo "${BLUE}done${RESET}"
+
+echo "${BLUE}Installing ${RED}Waybackurls${RESET}"
+GO111MODULE=on go install github.com/tomnomnom/hacks/waybackurls@latest
+echo "${BLUE}done${RESET}"
+
 echo "${BLUE}Installing ${RED}NAABU${RESET}"
 sudo apt install -y libpcap-dev
 GO111MODULE=on go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
 echo "${BLUE}done${RESET}"
+
+echo "${BLUE}Installing ${RED}Katana${RESET}"
+GO111MODULE=on go install github.com/projectdiscovery/katana/cmd/katana@latest
+echo "${BLUE}done${RESET}"
+
+echo "${BLUE}Installing Aquatone${RESET}"
+cd ~/tools
+git clone https://github.com/scheib/chromium-latest-linux.git
+cd chromium-latest-linux && chmod +x update-and-run.sh && ./update-and-run.sh
+wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip ~/tools
+unzip aquatone_linux_amd64_1*.zip 
+rm LICENSE.txt README.md
+sudo mv aquatone /usr/bin/
+echo "${BLUE}Done${RESET}"
 
 echo "${BLUE}Getting Fresh resolvers from trickest/resolvers${RESET}"
 mkdir -p ~/tools/Wordlists/
@@ -378,3 +487,5 @@ wget https://raw.githubusercontent.com/trickest/wordlists/main/inventory/subdoma
 echo "${BLUE}Done${RESET}"
 
 echo "\n\n${GREEN}All Set${RESET}"
+
+###
