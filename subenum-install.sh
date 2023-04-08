@@ -1,4 +1,4 @@
-#!/bin/bash/
+#!/bin/bash
 
 #go
 #notify 
@@ -24,8 +24,7 @@ GREEN=$(tput setaf 2)
 BLUE=$(tput setaf 4)
 RESET=$(tput sgr0)
 
-echo -e "\n\n${RED}Specify the VERSION of AMASS:\n\nEx:3.21.2 \nYou can check from -> 'https://github.com/OWASP/Amass/releases'\nAMASS_VERSION>>>\c" && read AMASS_VERSION 
-echo -e "\n\nSpecify the VERSION of GO:\n\nEx:1.19.3 \nYou can check from -> 'https://go.dev/doc/install'\nGOVERSION>>>\c${RESET}" && read GOVERSION
+echo -e "\n${RED}Specify the VERSION of GO:\n\nEx:1.20.3 \nYou can check from -> 'https://go.dev/doc/install'\nGOVERSION>>>\c${RESET}" && read GOVERSION
 
 sudo apt-get -y update
 sudo apt-get -y upgrade
@@ -57,12 +56,13 @@ sudo apt-fast install -y parallel
 sudo pip3 install jsbeautifier
 sudo apt install -y figlet
 sudo apt install -y tor
-
+sudo apt-get install git -y
+sudo apt-get install unzip -y
 echo ""
 echo ""
 sar 1 1 >/dev/null
 
-mkdir ~/tools
+mkdir -p ~/tools
 cd ~/tools
 
 GOSCRIPT(){
@@ -181,11 +181,6 @@ GOSCRIPT(){
                 exit 1
             fi
 
-            if [ -d "$GOROOT" ]; then
-                echo "The Go install directory ($GOROOT) already exists. Exiting."
-                exit 1
-            fi
-
             PACKAGE_NAME="go$GOVERSION.$PLATFORM.tar.gz"
             TEMP_DIRECTORY=$(mktemp -d)
 
@@ -235,7 +230,7 @@ GOSCRIPT(){
 
 GOINSTALL(){
     echo "${GREEN} [+] Installing Golang ${RESET}"
-    if [ ! -f /usr/bin/go ];then
+    if [[ ! -f /usr/bin/go ]];then
         cd ~
         #wget -q -O - https://raw.githubusercontent.com/canha/golang-tools-install-script/master/goinstall.sh | bash
         GOSCRIPT
@@ -249,12 +244,11 @@ GOINSTALL(){
     else 
         echo "${BLUE} Golang is already installed${RESET}"
     fi
-    #break
     echo""
     echo "${BLUE} Done Install Golang ${RESET}"
     echo ""
     echo ""
-    sar 1 1 >/dev/null
+    #sar 1 1 >/dev/null
 }
 
 GOINSTALL
@@ -281,60 +275,17 @@ echo "${BLUE}Installing Go version of github-subdomains scanning${RESET}"
 GO111MODULE=on go install github.com/gwen001/github-subdomains@latest
 echo "${BLUE}done${RESET}"
 
-AMASSDOWNLOAD(){
-    OS="$(uname -s)"
-    ARCH="$(uname -m)"
+cd ~/tools
 
-    case $OS in
-        "Linux")
-            case $ARCH in
-            "x86_64")
-                ARCH=amd64
-                ;;
-            "aarch64")
-                ARCH=arm64
-                ;;
-            "armv6" | "armv7l")
-                ARCH=armv6l
-                ;;
-            "armv8")
-                ARCH=arm64
-                ;;
-            .*386.*)
-                ARCH=386
-                ;;
-            esac
-            PLATFORM="linux_$ARCH"
-        ;;
-        "Darwin")
-              case $ARCH in
-              "x86_64")
-                  ARCH=amd64
-                  ;;
-              "arm64")
-                  ARCH=arm64
-                  ;;
-              esac
-            PLATFORM="darwin_$ARCH"
-        ;;
-    esac
-
-    echo "${BLUE} Installing amass${RESET}"
-    cd ~ && echo -e "Downloading amass version ${AMASS_VERSION} ..." && wget -q https://github.com/OWASP/Amass/releases/download/v${AMASS_VERSION}/amass_${PLATFORM}.zip && unzip amass_${PLATFORM}.zip
-    sudo mv amass_linux_amd64/amass /usr/bin/
-    cd ~ && rm -rf amass_${PLATFORM}* amass_${PLATFORM}.zip*
-    mkdir -p ~/.config/amass && cd ~/.config/amass && wget -q https://raw.githubusercontent.com/OWASP/Amass/master/examples/config.ini
-    echo "${BLUE}Amass done${RESET}"
-    echo ""
-
-}
-
-AMASSDOWNLOAD
-
+echo "${BLUE} Installing amass${RESET}"
+go install -v github.com/owasp-amass/amass/v3/...@master
+mkdir -p ~/.config/amass && cd ~/.config/amass && wget -q https://raw.githubusercontent.com/OWASP/Amass/master/examples/config.ini
+cd ~/tools
+echo "${BLUE}Amass done${RESET}"
+echo ""
 
 echo "${BLUE} Installing subfinder${RESET}"
 GO111MODULE=on go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
-
 echo "${BLUE}done${RESET}"
 echo ""
 
@@ -354,6 +305,7 @@ cd ~/tools
 git clone https://github.com/aboul3la/Sublist3r.git
 cd ~/tools/Sublist3r
 sudo pip3 install -r requirements.txt
+sudo apt-get install python3-requests
 echo "${BLUE} done ${RESET}"
 echo ""
 
@@ -381,7 +333,6 @@ sudo python3 setup.py install
 virtualenv --python=python3 venv3
 source venv3/bin/activate
 pip3 install -r requirements.txt
-
 echo "${BLUE} done${RESET}"
 echo ""
 
@@ -417,6 +368,7 @@ echo "${BLUE}done${RESET}"
 
 echo "${BLUE}Installing dnsvalidator${RESET}"
 cd ~/tools && git clone https://github.com/vortexau/dnsvalidator.git
+sudo pip3 install setuptools -y
 cd dnsvalidator && sudo python3 setup.py install
 echo "${BLUE}done${RESET}"
 
@@ -426,7 +378,8 @@ echo "${BLUE}done${RESET}"
 
 
 echo "${BLUE} Installing massdns ${RESET}"
-git clone https://github.com/blechschmidt/massdns.git ~/tools
+cd ~/tools
+git clone https://github.com/blechschmidt/massdns.git 
 cd ~/tools/massdns
 make && sudo make install
 echo "${BLUE} done ${RESET}"
@@ -476,16 +429,15 @@ sudo mv aquatone /usr/bin/
 echo "${BLUE}Done${RESET}"
 
 echo "${BLUE}Getting Fresh resolvers from trickest/resolvers${RESET}"
-mkdir -p ~/tools/Wordlists/
+mkdir -p ~/tools/Wordlists/ && cd ~/tools/Wordlists
 wget https://raw.githubusercontent.com/trickest/resolvers/main/resolvers.txt -q -P ~/tools/Wordlists/
 echo "${BLUE}Done${RESET}"
 
 echo "${BLUE}Getting Fresh wordlists from trickest/wordlists${RESET}"
-mkdir -p ~/tools/Wordlists/
 wget https://raw.githubusercontent.com/trickest/wordlists/main/inventory/subdomains.txt -q -P ~/tools/Wordlists/
 #git clone https://github.com/trickest/wordlists.git ~/tools/Wordlists/trickest
 echo "${BLUE}Done${RESET}"
 
-echo "\n\n${GREEN}All Set${RESET}"
+echo -e "\n\n${GREEN}All Set${RESET}"
 
 ###
