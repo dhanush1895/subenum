@@ -186,7 +186,8 @@ GOSCRIPT(){
 
             echo "Downloading $PACKAGE_NAME ..."
             if hash wget 2>/dev/null; then
-                wget https://storage.googleapis.com/golang/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
+                wget https://dl.google.com/go/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
+                #wget https://storage.googleapis.com/golang/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
             else
                 curl -o "$TEMP_DIRECTORY/go.tar.gz" https://storage.googleapis.com/golang/$PACKAGE_NAME
             fi
