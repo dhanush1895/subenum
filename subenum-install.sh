@@ -1,30 +1,43 @@
 #!/bin/bash
 
-#go
-#notify 
-#assetfinder
-#amass
-#subfinder
-#findomain
-#subls
-#github-subd
-#knockknock
-#fuzz
-#wordlist - all
-#knockpy
-#subbrute
-#filter-resolved
-#httpx
-#nuclei 
-
-
+####This tools are going to be installed in your system!!!!
+# GO 
+# anew
+# assetfinder
+# github-sub
+# gitlab-sub
+# amass
+# pdtm -all
+# findomain
+# sublister
+# knockknock or knock2
+# ffuf
+# subbrute
+# knockpy
+# filter-resolved
+# jsubfinder
+# crtpy
+# dnsvalidator
+# massdns
+# sd-goo
+# gobuster
+# waybackurls
+# aquatone
+# gf tool & gf patterns
+# unfurl
+# qsreplace
+# meg
+# cent
+# trickest resolvers & subs-wordlist
 
 RED=$(tput setaf 1)
 GREEN=$(tput setaf 2)
 BLUE=$(tput setaf 4)
+BLINK=$(tput blink)
 RESET=$(tput sgr0)
 
-echo -e "\n${RED}Specify the VERSION of GO:\n\nEx:1.20.3 \nYou can check from -> 'https://go.dev/doc/install'\nGOVERSION>>>\c${RESET}" && read GOVERSION
+#echo -e "\n\n${RED}Specify the VERSION of AMASS:\n\nEx:3.21.2 \nYou can check from -> 'https://github.com/OWASP/Amass/releases'\nAMASS_VERSION>>>\c" && read AMASS_VERSION 
+echo -e "\n${RED}Specify the VERSION of GO:\n\nEx:1.20.6 \nYou can check from -> 'https://go.dev/doc/install'\nGOVERSION>>>\c${RESET}" && read GOVERSION
 
 sudo apt-get -y update
 sudo apt-get -y upgrade
@@ -58,6 +71,7 @@ sudo apt install -y figlet
 sudo apt install -y tor
 sudo apt-get install git -y
 sudo apt-get install unzip -y
+sudo apt install -y libpcap-dev
 echo ""
 echo ""
 sar 1 1 >/dev/null
@@ -181,13 +195,18 @@ GOSCRIPT(){
                 exit 1
             fi
 
+            # if [ -d "$GOROOT" ]; then
+            #     echo "The Go install directory ($GOROOT) already exists. Exiting."
+            #     exit 1
+            #     # break;;
+            # fi
+
             PACKAGE_NAME="go$GOVERSION.$PLATFORM.tar.gz"
             TEMP_DIRECTORY=$(mktemp -d)
 
             echo "Downloading $PACKAGE_NAME ..."
             if hash wget 2>/dev/null; then
-                wget https://dl.google.com/go/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
-                #wget https://storage.googleapis.com/golang/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
+                wget https://storage.googleapis.com/golang/$PACKAGE_NAME -O "$TEMP_DIRECTORY/go.tar.gz"
             else
                 curl -o "$TEMP_DIRECTORY/go.tar.gz" https://storage.googleapis.com/golang/$PACKAGE_NAME
             fi
@@ -245,6 +264,7 @@ GOINSTALL(){
     else 
         echo "${BLUE} Golang is already installed${RESET}"
     fi
+    #break
     echo""
     echo "${BLUE} Done Install Golang ${RESET}"
     echo ""
@@ -256,48 +276,98 @@ GOINSTALL
 
 
 echo "${BLUE} Installing anew ${RESET}"
-GO111MODULE=on go install -v github.com/tomnomnom/anew@latest
+go install github.com/tomnomnom/anew@latest
 echo "${BLUE}done${RESET}"
 echo ""
 
-echo "${BLUE} Installing notify & intercept ${RESET}"
-GO111MODULE=on go install -v github.com/projectdiscovery/notify/cmd/notify@latest
-GO111MODULE=on go install -v github.com/projectdiscovery/notify/cmd/intercept@latest
-echo "${BLUE} done${RESET}"
-echo ""
-
-
 echo "${BLUE} Installing assetfinder${RESET}"
-GO111MODULE=on go install -v github.com/tomnomnom/assetfinder@latest
+go install github.com/tomnomnom/assetfinder@latest
 echo "${BLUE} done${RESET}"
 echo ""
 
 echo "${BLUE}Installing Go version of github-subdomains scanning${RESET}"
-GO111MODULE=on go install github.com/gwen001/github-subdomains@latest
+go install github.com/gwen001/github-subdomains@latest
 echo "${BLUE}done${RESET}"
+
+echo "${BLUE}Installing Gitlab-subdomains scanning${RESET}"
+go install github.com/gwen001/gitlab-subdomains@latest
+echo "${BLUE}done${RESET}"
+
+# AMASSDOWNLOAD(){
+#     OS="$(uname -s)"
+#     ARCH="$(uname -m)"
+
+#     case $OS in
+#         "Linux")
+#             case $ARCH in
+#             "x86_64")
+#                 ARCH=amd64
+#                 ;;
+#             "aarch64")
+#                 ARCH=arm64
+#                 ;;
+#             "armv6" | "armv7l")
+#                 ARCH=armv6l
+#                 ;;
+#             "armv8")
+#                 ARCH=arm64
+#                 ;;
+#             .*386.*)
+#                 ARCH=386
+#                 ;;
+#             esac
+#             PLATFORM="linux_$ARCH"
+#         ;;
+#         "Darwin")
+#               case $ARCH in
+#               "x86_64")
+#                   ARCH=amd64
+#                   ;;
+#               "arm64")
+#                   ARCH=arm64
+#                   ;;
+#               esac
+#             PLATFORM="darwin_$ARCH"
+#         ;;
+#     esac
+
+#     echo "${BLUE} Installing amass${RESET}"
+#     cd ~ && echo -e "Downloading amass version ${AMASS_VERSION} ..." && wget -q https://github.com/OWASP/Amass/releases/download/v${AMASS_VERSION}/amass_${PLATFORM}.zip && unzip amass_${PLATFORM}.zip
+#     sudo mv amass_linux_amd64/amass /usr/bin/
+#     cd ~ && rm -rf amass_${PLATFORM}* amass_${PLATFORM}.zip*
+#     mkdir -p ~/.config/amass && wget -q https://raw.githubusercontent.com/OWASP/Amass/master/examples/config.ini -P ~/.config/amass
+#     echo "${BLUE}Amass done${RESET}"
+#     echo ""
+
+# }
+
+# AMASSDOWNLOAD
 
 cd ~/tools
 
 echo "${BLUE} Installing amass${RESET}"
-go install -v github.com/owasp-amass/amass/v3/...@master
-mkdir -p ~/.config/amass && cd ~/.config/amass && wget -q https://raw.githubusercontent.com/OWASP/Amass/master/examples/config.ini
+go install github.com/owasp-amass/amass/v4/...@master
+mkdir -p ~/.config/amass && wget -q https://raw.githubusercontent.com/OWASP/Amass/master/examples/config.ini -P ~/.config/amass
 cd ~/tools
 echo "${BLUE}Amass done${RESET}"
 echo ""
 
-echo "${BLUE} Installing subfinder${RESET}"
-GO111MODULE=on go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+
+echo "${BLUE}Installing All Project Discovery Tools${RESET}"
+go install github.com/projectdiscovery/pdtm/cmd/pdtm@latest
+pdtm -ia
+echo "${BLUE}Done${RESET}"
+
+echo "${BLUE} Installing findomain${RESET}"
+cd ~/tools
+curl -LO https://github.com/findomain/findomain/releases/latest/download/findomain-linux.zip
+unzip findomain-linux.zip
+sudo chmod +x findomain
+sudo mv findomain /usr/bin/findomain
+rm findomain-linux.zip
+echo "${RED} Add your keys in the config file"
 echo "${BLUE}done${RESET}"
 echo ""
-
-# echo "${BLUE} Installing findomain${RESET}"
-# cd ~/tools
-# wget https://github.com/Findomain/Findomain/releases/download/8.2.1/findomain-linux.zip
-# sudo chmod +x findomain-linux
-# sudo mv findomain-linux /usr/bin/
-# echo "${BLUE} Add your keys in the config file"
-# echo "${BLUE} done${RESET}"
-# echo ""
 sar 1 1 >/dev/null
 
 
@@ -306,18 +376,18 @@ cd ~/tools
 git clone https://github.com/aboul3la/Sublist3r.git
 cd ~/tools/Sublist3r
 sudo pip3 install -r requirements.txt
-sudo apt-get install python3-requests
+sudo apt-get install python3-requests -y
 echo "${BLUE} done ${RESET}"
 echo ""
 
 echo "${BLUE} Installing knock2 or knockknock${RESET}"
-go install -v github.com/harleo/knockknock@latest
+go install github.com/harleo/knockknock@latest
 echo "${BLUE} done${RESET}"
 echo ""
 
 
 echo "${BLUE} Installing ffuf${RESET}"
-go install -v github.com/ffuf/ffuf@latest
+go install github.com/ffuf/ffuf@latest
 echo "${BLUE} done${RESET}"
 echo ""
 
@@ -329,33 +399,22 @@ echo "${BLUE}done${RESET}"
 echo "${BLUE} Downloading knockpy${RESET}"
 cd ~/tools/ && git clone https://github.com/guelfoweb/knock.git
 cd knock
-sudo apt install python3-virtualenv
+sudo apt install python3-virtualenv -y
 sudo python3 setup.py install
-virtualenv --python=python3 venv3
-source venv3/bin/activate
+#virtualenv --python=python3 venv3
+#source venv3/bin/activate
 pip3 install -r requirements.txt
 echo "${BLUE} done${RESET}"
 echo ""
 
 
 echo "${BLUE} Installing filter-resolved${RESET}"
-GO111MODULE=on go install -v github.com/tomnomnom/hacks/filter-resolved@install
-echo "${BLUE} done${RESET}"
-echo ""
-
-
-echo "${BLUE} Installing httpx${RESET}"
-GO111MODULE=on go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
-echo "${BLUE} done${RESET}"
-echo ""
-
-echo "${BLUE} Installing nuclei${RESET}"
-GO111MODULE=on go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
+go install github.com/tomnomnom/hacks/filter-resolved@install
 echo "${BLUE} done${RESET}"
 echo ""
 
 echo "${BLUE}Installing JSUBFINDER${RESET}"
-GO111MODULE=on go install -v github.com/hiddengearz/jsubfinder@latest
+go install github.com/hiddengearz/jsubfinder@latest
 wget https://raw.githubusercontent.com/hiddengearz/jsubfinder/master/.jsf_signatures.yaml && mv .jsf_signatures.yaml ~/.jsf_signatures.yaml
 echo "${BLUE}done${RESET}"
 
@@ -369,12 +428,8 @@ echo "${BLUE}done${RESET}"
 
 echo "${BLUE}Installing dnsvalidator${RESET}"
 cd ~/tools && git clone https://github.com/vortexau/dnsvalidator.git
-sudo pip3 install setuptools -y
+sudo pip3 install setuptools
 cd dnsvalidator && sudo python3 setup.py install
-echo "${BLUE}done${RESET}"
-
-echo "${BLUE}Installing shuffledns${RESET}"
-GO111MODULE=on go install -v github.com/projectdiscovery/shuffledns/cmd/shuffledns@latest
 echo "${BLUE}done${RESET}"
 
 
@@ -394,29 +449,17 @@ echo -e "USAGE : ./sd-goo.sh google.com | sort -u"
 echo "${BLUE} done ${RESET}"
 echo ""
 
-echo "${BLUE}Installing CENT tool${RESET}"
-cd ~/tools
-GO111MODULE=on go install -v github.com/xm1k3/cent@latest
-cent init
-cent update
-cent -p ~/cent-nuclei-templates -k
-echo "${BLUE}done${RESET}"
-
 echo "${BLUE}Installing ${RED}gobuster ${RESET}"
-GO111MODULE=on go install github.com/OJ/gobuster/v3@latest
+go install github.com/OJ/gobuster/v3@latest
 echo "${BLUE}done${RESET}"
 
 echo "${BLUE}Installing ${RED}Waybackurls${RESET}"
-GO111MODULE=on go install github.com/tomnomnom/hacks/waybackurls@latest
+go install github.com/tomnomnom/hacks/waybackurls@latest
 echo "${BLUE}done${RESET}"
 
-echo "${BLUE}Installing ${RED}NAABU${RESET}"
-sudo apt install -y libpcap-dev
-GO111MODULE=on go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
-echo "${BLUE}done${RESET}"
-
-echo "${BLUE}Installing ${RED}Katana${RESET}"
-GO111MODULE=on go install github.com/projectdiscovery/katana/cmd/katana@latest
+echo "${BLUE}Installing ${RED}fuzzing-templates${RESET}"
+cd ~/
+git clone https://github.com/projectdiscovery/fuzzing-templates.git
 echo "${BLUE}done${RESET}"
 
 echo "${BLUE}Installing Aquatone${RESET}"
@@ -426,19 +469,59 @@ cd chromium-latest-linux && chmod +x update-and-run.sh && ./update-and-run.sh
 wget https://github.com/michenriksen/aquatone/releases/download/v1.7.0/aquatone_linux_amd64_1.7.0.zip ~/tools
 unzip aquatone_linux_amd64_1*.zip 
 rm LICENSE.txt README.md
-sudo mv aquatone /usr/bin/
+sudo mv -f aquatone /usr/bin/
 echo "${BLUE}Done${RESET}"
 
-echo "${BLUE}Getting Fresh resolvers from trickest/resolvers${RESET}"
+
+echo "${BLUE}Installing tomnomnom tools${RESET}"
+cd ~/tools
+echo "Installing GF tool and GF patterns"
+go install github.com/tomnomnom/gf@latest
+echo 'source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.bash' >> ~/.bashrc
+echo 'source $GOPATH/src/github.com/tomnomnom/gf/gf-completion.bash' >> ~/.bash_profile
+cp -r $GOPATH/src/github.com/tomnomnom/gf/examples ~/.gf
+cd ~/tools && git clone https://github.com/emadshanab/Gf-Patterns-Collection.git 
+cd ~/tools/Gf-Patterns-Collection
+chmod +x set-all.sh
+./set-all.sh 
+echo "${BLUE}Done${RESET}"
+
+echo "${BLUE}Installing unfurl${RESET}"
+go install github.com/tomnomnom/unfurl@latest
+echo "${BLUE}Done${RESET}"
+
+echo "${BLUE}Installing qsreplace${RESET}"
+go install github.com/tomnomnom/qsreplace@latest
+echo "${BLUE}Done${RESET}"
+
+echo "${BLUE}Installing meg${RESET}"
+go install github.com/tomnomnom/meg@latest
+echo "${BLUE}Done${RESET}"
+echo "${BLUE}Few Tomnomnom tools were installed, feel free to add more in the script!!!${RESET}"
+
+echo "${BLUE}Installing CENT tool${RESET}"
+cd ~/tools
+go install github.com/xm1k3/cent@latest
+cent init
+cent update
+cent -p ~/cent-nuclei-templates -k
+echo "${BLUE}done${RESET}"
+
+echo "${BLUE}Installing regulator${RESET}"
+cd ~/tools
+git clone https://github.com/cramppet/regulator.git
+cd ~/tools/regulator && pip3 install -r requirements.txt
+echo "${BLUE}Done${RESET}"
+
+echo "${BLUE}Getting Fresh resolvers from trickest-resolvers${RESET}"
 mkdir -p ~/tools/Wordlists/ && cd ~/tools/Wordlists
 wget https://raw.githubusercontent.com/trickest/resolvers/main/resolvers.txt -q -P ~/tools/Wordlists/
 echo "${BLUE}Done${RESET}"
 
-echo "${BLUE}Getting Fresh wordlists from trickest/wordlists${RESET}"
+echo "${BLUE}Getting Fresh wordlists from trickest-wordlists${RESET}"
 wget https://raw.githubusercontent.com/trickest/wordlists/main/inventory/subdomains.txt -q -P ~/tools/Wordlists/
 #git clone https://github.com/trickest/wordlists.git ~/tools/Wordlists/trickest
 echo "${BLUE}Done${RESET}"
 
+echo "${RED} Make sure you set API keys in ~/.config/amass & ~/.config/subfinder & ~/.config/notify ${RESET}"
 echo -e "\n\n${GREEN}All Set${RESET}"
-
-###
