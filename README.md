@@ -1,7 +1,7 @@
 # subenum
 Subdomain enumeration tool based on All open source Tool, this is a Bash file which performs Domain as a target in all Described tools & resources and passes out the domains, found-ports and live domains into individual files.
 
-[![LinkedIn][linkedin-shield]][[linkedin-url](https://www.linkedin.com/in/danielthotapalli/)] ![Twitter Follow](https://img.shields.io/twitter/follow/dhanush1895?style=social)
+[![LinkedIn][linkedin-shield]][linkedin-url] ![Twitter Follow](https://img.shields.io/twitter/follow/dhanush1895?style=social)
 
 
 
@@ -120,12 +120,12 @@ Contributions are what make the open source community such an amazing place to b
 
 Daniel goes by `dhanush1895` on Internet  - [@dhanush1895](https://twitter.com/dhanush1895) 
 
-dhanushkalimeli[at]GmaIL[dot]cOm
+dhanushkalimeli@gmail.com
 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/daniel-thotapalli
+[linkedin-url]: https://www.linkedin.com/in/danielthotapalli
 [product-screenshot]: images/screenshot.png
