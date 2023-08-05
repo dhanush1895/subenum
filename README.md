@@ -41,22 +41,24 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 
 ### Built With
 
-- Dnsvalidator
 - Amass
 - assetfinder
 - subfinder
-- sublist3r
 - github-subdomains
 - crt.sh
-- dns.bufferover.run
-- sonar.omisint.io
 - web.archive
 - knockpy
-- GOBUSTER
 - knockknock
+- shuffledns
+- gitlab-subdomains
+- gau
+- gauplus
+- dnsx
+- naabu
 - httpx
 - nuclei
 - notify
+- Trickest Wordlists & Resolvers
 
 
 ### Prerequisites
@@ -78,7 +80,7 @@ A list of commonly used resources that I find helpful are listed in the acknowle
    ```sh
    ./subenum-install.sh
    ```
-3. Enter your API-key's in `config.yaml`- subfinder config file,`config.ini`- amass config file.
+3. Enter your API-key's in `config.yaml`- subfinder config file,`datasources.yaml` & `config.yaml`- amass config file.
 4. Keep alias for subenum in your .profile/.bash_profile/.bash_aliases 
    ```sh
    alias subenum="bash path_to_script"
@@ -89,18 +91,23 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 <!-- USAGE EXAMPLES -->
 ## Usage
 1. ```
-      Usage: subenum -d google.com
-      Usage: subenum -f PATH/TO/FILE
-      Usage: subenum -d google.com -c [1|2]
-      Usage: subenum -f PATH/TO/domains.txt -c [1|2]
       Flags:
-      -h, -help                      Show's usage
-      -d, -domain                    Add your domain
-      -f, -file                      List of Domains as file.txt should be line separated file
-      -c, -config                      config file for amass
+       -h, -help                      Show's usage
+       -d, -domain                    Add your domain
+       -f, -file                      List of Domains as domain_names.txt
+       -a, -active                    Do Active Enumeration
+       -p, -passive                   Do Passive Enumeration
+       -P, -portscan                 Enable Naabu Port scan on found hosts
+      
       Example Usage
-      ./subenum.sh -d google.com
-      ./subenum.sh -f domains.txt
+      Usage: subenum -d google.com [-a|-p] -P
+      Usage: subenum -f PATH/TO/FILE [-a|-p] -P
+      Usage: subenum -d google.com [-a|-p] -P
+      Usage: subenum -f PATH/TO/domains.txt [-a|-p] -P
+      
+      Optional Flags:
+      -a or -p to be used ( Optional default -a is used for Enumeration)
+      -P to do portscan on all alive domains
    ```
 
 <!-- ROADMAP -->
@@ -108,6 +115,7 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 - [X] To get massive amount of sub-domains using all the open-source tools
 - [X] To filter & resolve out the live sub-domains 
 - [X] To Run sub-domain takeover scan using nuclei templates
+- [ ] Run Level 1,2,3,4+ subdomain brute forcing.
 
 <!-- CONTRIBUTING -->
 ## Contributing
