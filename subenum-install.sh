@@ -513,6 +513,11 @@ git clone https://github.com/cramppet/regulator.git
 cd ~/tools/regulator && pip3 install -r requirements.txt
 echo "${BLUE}Done${RESET}"
 
+echo "${BLUE}Installing Gau & GauPlus${RESET}"
+go install github.com/lc/gau/v2/cmd/gau@latest
+go install github.com/bp0lr/gauplus@latest
+echo "${BLUE}Done${RESET}"
+
 echo "${BLUE}Getting Fresh resolvers from trickest-resolvers${RESET}"
 mkdir -p ~/tools/Wordlists/ && cd ~/tools/Wordlists
 wget https://raw.githubusercontent.com/trickest/resolvers/main/resolvers.txt -q -P ~/tools/Wordlists/
